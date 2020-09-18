@@ -24,7 +24,21 @@
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->name }}</td>
                     <td>
-                        <a href="{{route('categories.edit',['category' => $category->id])}}">editar</a>
+                    <ul>
+                        <li>
+                            <a href="{{route('categories.edit',['category' => $category->id])}}" class="btn btn-primary">editar</a>
+                        </li>
+
+                        <li>
+                            <?php $deleteFormID = "delete-form-{$loop->index}" ?>
+                        <a href="{{route('categories.destroy',['category' => $category->id])}}" class="btn btn-danger" onclick="event.preventDefault();document.getElementById('{{$deleteFormID}}').submit();" >remover</a>
+                        {!! Form::open(['route' => ['categories.destroy', 'category' => $category->id ], 'method' => 'DELETE', 'id' => "$deleteFormID", 'style' => 'display:none']) !!}
+                      
+                        {!! Form::close() !!}
+                        </li>
+                    </ul>
+                       
+                       
                     </td>
                 </tr>
 
