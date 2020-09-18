@@ -24,7 +24,7 @@
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->name }}</td>
                     <td>
-                        AÇões
+                        <a href="{{route('categories.edit',['category' => $category->id])}}">editar</a>
                     </td>
                 </tr>
 
