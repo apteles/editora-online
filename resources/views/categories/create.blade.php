@@ -16,18 +16,17 @@
 
 
         {!! Form::open(['route' => 'categories.store', 'class' => 'form']) !!}
-   
+            {!! Html::openFormGroup('name', $errors) !!}
 
-            <div class="form-group {{$errors->first('name') ? 'has-error': '' }}">
                 {!! Form::label('name', 'Nome', ['class' => 'control-label']) !!}
                 {!! Form::text('name', null, ['class' => 'form-control']) !!}
                 {!! Form::error('name', $errors) !!}
-            </div>
 
-            <div class="form-group">
+            {!! Html::closeFormGroup() !!}
+
+            {!! Html::openFormGroup() !!}
                 {!! Form::submit('criar categoria', ['class' => 'btn btn-primary']) !!}
-            </div>
-
+            {!! Html::closeFormGroup() !!}
         {!! Form::close() !!}
     </div>
  </div>

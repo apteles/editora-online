@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-use App\Macro\Form;
+use App\Macros\Form;
+use App\Macros\Html;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Form::register();
+        Html::register();
     }
 
     /**
