@@ -18,9 +18,10 @@
         {!! Form::open(['route' => 'categories.store', 'class' => 'form']) !!}
    
 
-            <div class="form-group">
-                {!! Form::label('name', 'Nome') !!}
+            <div class="form-group {{$errors->first('name') ? 'has-error': '' }}">
+                {!! Form::label('name', 'Nome', ['class' => 'control-label']) !!}
                 {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                {!! Form::error('name', $errors) !!}
             </div>
 
             <div class="form-group">
