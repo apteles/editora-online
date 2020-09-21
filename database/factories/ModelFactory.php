@@ -29,3 +29,12 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
         'name' => \ucfirst($faker->unique()->word()),
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Product::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->name,
+        'subtitle' => $faker->sentence(),
+        'price' => $faker->randomFloat(2, 0, 999),
+    ];
+});
