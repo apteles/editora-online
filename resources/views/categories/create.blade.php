@@ -6,6 +6,14 @@
     <div class="row">
         <h3>Nova categoria</h3>
     
+        @if($errors->any())
+          <ul class="alert alert-danger list-inline">
+              @foreach($errors->all() as $error)
+                {{$error}}
+              @endforeach
+          </ul>  
+        @endif
+
 
         {!! Form::open(['route' => 'categories.store', 'class' => 'form']) !!}
    
