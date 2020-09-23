@@ -32,6 +32,19 @@ class CategoryRequest extends FormRequest
     {
         $category = $this->route('category');
 
-        return $category->id ?? null;
+        return $category->id ?? 'null';
+    }
+
+    public function messages()
+    {
+        return [
+            'required' => 'O :attribute é obrigatório',
+            'unique' => 'O :attribute já está em uso'
+        ];
+    }
+
+    public function attributes()
+    {
+        return ['name' => 'nome'];
     }
 }
