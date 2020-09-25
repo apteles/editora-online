@@ -24,15 +24,13 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => "required|max:255|unique:categories,name,{$this->getIdFromModelIfExist()}"
+            'name' => "required|max:255|unique:categories,name,{$this->getIdRouteParamOrNull()}"
         ];
     }
 
-    public function getIdFromModelIfExist()
+    public function getIdRouteParamOrNull()
     {
-        $category = $this->route('category');
-
-        return $category->id ?? 'null';
+        return $this->route('category') ?? 'NULL';
     }
 
     public function messages()
