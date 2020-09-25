@@ -7,14 +7,18 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BookRequest;
 use App\Repositories\BookRepository;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\CategoryRepository;
 
 class BooksController extends Controller
 {
     private $bookRepository;
 
-    public function __construct(BookRepository $book)
+    private $categoryRepository;
+
+    public function __construct(BookRepository $book, CategoryRepository $category)
     {
         $this->bookRepository = $book;
+        $this->categoryRepository = $category;
     }
 
     /**
@@ -25,7 +29,6 @@ class BooksController extends Controller
     public function index(Request $request)
     {
         $books = $this->bookRepository->paginate();
-
         return view('books.index', \compact('books'));
     }
 
@@ -36,7 +39,9 @@ class BooksController extends Controller
      */
     public function create()
     {
-        return view('books.create');
+        $categories = $this->categoryRepository->lists('name', 'id');
+
+        return view('books.create', \compact('categories'));
     }
 
     /**

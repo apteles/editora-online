@@ -1,17 +1,25 @@
- <div class="form-group">
+{!! Html::openFormGroup('title', $errors) !!} 
     {!! Form::label('title', 'Título') !!}
     {!! Form::text('title', null, ['class' => 'form-control']) !!}
- </div>
- 
- <div class="form-group">
+    {!! Form::error('title', $errors) !!}
+{!! Html::closeFormGroup() !!} 
+
+{!! Html::openFormGroup('subtitle', $errors) !!} 
     {!! Form::label('subtitle', 'Subtítulo') !!}
     {!! Form::text('subtitle', null, ['class' => 'form-control']) !!}
- </div>
+    {!! Form::error('subtitle', $errors) !!}
+{!! Html::closeFormGroup() !!} 
  
- <div class="form-group">
+{!! Html::openFormGroup('price', $errors) !!} 
     {!! Form::label('price', 'Preço') !!}
     {!! Form::text('price', null, ['class' => 'form-control']) !!}
- </div>
- 
+    {!! Form::error('price', $errors) !!}
+{!! Html::closeFormGroup() !!} 
+
+{!! Html::openFormGroup('categories', $errors) !!} 
+    {!! Form::label('categories', 'Categorias') !!}
+    {!! Form::select('categories[]', $categories, null, ['class' => 'form-control', 'multiple' => true]) !!}
+    {!! Form::error('categories', $errors) !!}
+{!! Html::closeFormGroup() !!} 
 
 {!! Form::hidden('redirect_to', URL::previous()) !!}
