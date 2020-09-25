@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use App\Http\Requests\BookRequest;
+use Illuminate\Support\Facades\Auth;
 
 class BooksController extends Controller
 {
@@ -38,11 +39,14 @@ class BooksController extends Controller
     public function store(BookRequest $request)
     {
         $dataFromRequest = $request->all();
-        $dataFromRequest['user_id'] = \Auth::user()->id;
+        $dataFromRequest['author_id'] = 1;
+        //Auth::user()->id;
 
         Book::create($dataFromRequest);
 
-        return redirect()->route('books.index');
+        $request->session()->flash('message', 'Livro cadastrado com sucesso.');
+        $previousURL = $request->get('redirect_to', route('books.index'));
+        return redirect()->to($previousURL);
     }
 
     /**
@@ -70,7 +74,9 @@ class BooksController extends Controller
         $book->fill($dataFromRequest);
         $book->save();
 
-        return redirect()->route('books.index');
+        $request->session()->flash('message', 'Livro cadastrado com sucesso.');
+        $previousURL = $request->get('redirect_to', route('books.index'));
+        return redirect()->to($previousURL);
     }
 
     /**
