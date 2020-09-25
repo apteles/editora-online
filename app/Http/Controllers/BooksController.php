@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Entities\Book;
 use Illuminate\Http\Request;
-use App\Criterias\FindByTitle;
 use App\Http\Requests\BookRequest;
 use App\Repositories\BookRepository;
 use Illuminate\Support\Facades\Auth;
@@ -25,9 +24,6 @@ class BooksController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request->get('search');
-        $this->bookRepository->pushCriteria(new FindByTitle($search));
-
         $books = $this->bookRepository->paginate();
 
         return view('books.index', \compact('books'));
