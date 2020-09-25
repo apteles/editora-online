@@ -1,12 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Bootstrapper\Interfaces\TableInterface;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 
-class Category extends Model implements TableInterface
+class Category extends Model implements TableInterface, Transformable
 {
+    use TransformableTrait;
     protected $fillable = ['name'];
 
     public function getTableHeaders()

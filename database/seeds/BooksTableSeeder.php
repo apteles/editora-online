@@ -1,6 +1,6 @@
 <?php
 
-use App\Book;
+use App\Entities\Book;
 use Illuminate\Database\Seeder;
 
 class BooksTableSeeder extends Seeder

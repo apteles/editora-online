@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Book;
+use App\Entities\Book;
 use App\Http\Requests\BookRequest;
+use App\Repositories\BookRepository;
 use Illuminate\Support\Facades\Auth;
 
 class BooksController extends Controller
 {
+    private $bookRepository;
+
+    public function __construct(BookRepository $book)
+    {
+        $this->bookRepository = $book;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +23,7 @@ class BooksController extends Controller
      */
     public function index()
     {
-        $books = Book::query()->paginate();
+        $books = $this->bookRepository->paginate();
 
         return view('books.index', \compact('books'));
     }
@@ -39,10 +47,8 @@ class BooksController extends Controller
     public function store(BookRequest $request)
     {
         $dataFromRequest = $request->all();
-        $dataFromRequest['author_id'] = 1;
-        //Auth::user()->id;
-
-        Book::create($dataFromRequest);
+        $dataFromRequest['author_id'] = Auth::user()->id;
+        $this->bookRepository->create($dataFromRequest);
 
         $request->session()->flash('message', 'Livro cadastrado com sucesso.');
         $previousURL = $request->get('redirect_to', route('books.index'));
@@ -67,12 +73,11 @@ class BooksController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function update(BookRequest $request, Book $book)
+    public function update(BookRequest $request, $id)
     {
         $dataFromRequest = $request->except('author_id');
 
-        $book->fill($dataFromRequest);
-        $book->save();
+        $this->bookRepository->update($dataFromRequest, $id);
 
         $request->session()->flash('message', 'Livro cadastrado com sucesso.');
         $previousURL = $request->get('redirect_to', route('books.index'));
@@ -85,9 +90,9 @@ class BooksController extends Controller
      * @param  Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy($id)
     {
-        $book->delete();
+        $this->bookRepository->delete($id);
         return redirect()->route('books.index');
     }
 }
