@@ -20,7 +20,7 @@
             @include('categories._form')
 
             {!! Html::openFormGroup() !!}
-                {!! Form::submit('criar categoria', ['class' => 'btn btn-primary']) !!}
+                {!! Button::primary('criar categoria')->submit() !!}
             {!! Html::closeFormGroup() !!}
         {!! Form::close() !!}
     </div>

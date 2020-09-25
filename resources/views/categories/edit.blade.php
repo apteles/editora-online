@@ -13,7 +13,7 @@
            @include('categories._form') 
 
             {!! Html::openFormGroup() !!}
-                {!! Form::submit('salvar categoria', ['class' => 'btn btn-primary']) !!}
+                {!! Button::primary('salvar categoria')->submit() !!}
             {!! Html::closeFormGroup() !!}
 
         {!! Form::close() !!}
