@@ -69,7 +69,8 @@ class BooksController extends Controller
      */
     public function edit(Book $book)
     {
-        return view('books.edit', \compact('book'));
+        $categories = $this->categoryRepository->lists('name', 'id');
+        return view('books.edit', \compact('book', 'categories'));
     }
 
     /**
