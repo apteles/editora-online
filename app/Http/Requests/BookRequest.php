@@ -2,10 +2,19 @@
 
 namespace App\Http\Requests;
 
+use App\Repositories\BookRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BookRequest extends FormRequest
 {
+    private $bookRepository;
+
+    public function __construct(BookRepository $bookRepository)
+    {
+        $this->bookRepository = $bookRepository;
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -13,7 +22,15 @@ class BookRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        $id = (int) $this->route('book');
+
+        if ($id === 0) {
+            return false;
+        }
+
+        $book = $this->bookRepository->find($id);
+
+        return $book->author_id === Auth::user()->id;
     }
 
     /**
@@ -24,16 +41,14 @@ class BookRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => "required|unique:books,title,{$this->getIdFromModelIfExist()}|max:255",
+            'title' => "required|unique:books,title,{$this->getIdRouteParamOrNull()}|max:255",
             'subtitle' => 'required|max:255',
             'price' => 'required|max:255',
         ];
     }
 
-    public function getIdFromModelIfExist()
+    public function getIdRouteParamOrNull()
     {
-        $book = $this->route('book');
-
-        return $book->id ?? 'null';
+        return $this->route('book') ?? 'NULL';
     }
 }
