@@ -31,10 +31,11 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Product::class, function (Faker\Generator $faker) {
+$factory->define(App\Book::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->name,
         'subtitle' => $faker->sentence(),
         'price' => $faker->randomFloat(2, 0, 999),
+        'author_id' => \rand(1, 10)
     ];
 });

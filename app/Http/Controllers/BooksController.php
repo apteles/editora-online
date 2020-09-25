@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
-use Illuminate\Http\Request;
+use App\Book;
+use App\Http\Requests\BookRequest;
 
-class ProductsController extends Controller
+class BooksController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $books = Product::query()->paginate();
+        $books = Book::query()->paginate();
 
         return view('books.index', \compact('books'));
     }
@@ -35,9 +35,12 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookRequest $request)
     {
-        Product::create($request->all());
+        $dataFromRequest = $request->all();
+        $dataFromRequest['user_id'] = \Auth::user()->id;
+
+        Book::create($dataFromRequest);
 
         return redirect()->route('books.index');
     }
@@ -48,7 +51,7 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $book)
+    public function edit(Book $book)
     {
         return view('books.edit', \compact('book'));
     }
@@ -60,9 +63,11 @@ class ProductsController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function update(Request $request, Product $book)
+    public function update(BookRequest $request, Book $book)
     {
-        $book->fill($request->all());
+        $dataFromRequest = $request->except('author_id');
+
+        $book->fill($dataFromRequest);
         $book->save();
 
         return redirect()->route('books.index');
@@ -74,7 +79,7 @@ class ProductsController extends Controller
      * @param  Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $book)
+    public function destroy(Book $book)
     {
         $book->delete();
         return redirect()->route('books.index');
