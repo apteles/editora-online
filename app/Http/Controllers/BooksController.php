@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Entities\Book;
 use App\Http\Requests\BookRequest;
 use App\Repositories\BookRepository;
+use Illuminate\Support\Facades\Auth;
 
 class BooksController extends Controller
 {
@@ -46,8 +47,7 @@ class BooksController extends Controller
     public function store(BookRequest $request)
     {
         $dataFromRequest = $request->all();
-        $dataFromRequest['author_id'] = 1;
-        //Auth::user()->id;
+        $dataFromRequest['author_id'] = Auth::user()->id;
         $this->bookRepository->create($dataFromRequest);
 
         $request->session()->flash('message', 'Livro cadastrado com sucesso.');
