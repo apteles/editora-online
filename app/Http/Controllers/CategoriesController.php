@@ -65,7 +65,8 @@ class CategoriesController extends Controller
         $category->fill($request->all());
         $category->save();
 
-        return redirect()->route('categories.index');
+        $previousURL = $request->get('redirect_to', route('categories.index'));
+        return redirect()->to($previousURL);
     }
 
     /**
