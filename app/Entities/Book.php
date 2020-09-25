@@ -34,4 +34,9 @@ class Book extends Model implements TableInterface
             return $this->price;
         }
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }
