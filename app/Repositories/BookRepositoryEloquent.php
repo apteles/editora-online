@@ -13,6 +13,11 @@ use Prettus\Repository\Criteria\RequestCriteria;
  */
 class BookRepositoryEloquent extends BaseRepository implements BookRepository
 {
+    protected $fieldSearchable = [
+        'title' => 'like',
+        'author.name' => 'like'
+    ];
+
     /**
      * Specify Model class name
      *

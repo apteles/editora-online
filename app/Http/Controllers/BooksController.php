@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Book;
+use Illuminate\Http\Request;
 use App\Http\Requests\BookRequest;
 use App\Repositories\BookRepository;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,7 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $books = $this->bookRepository->paginate();
 
