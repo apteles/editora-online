@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Book;
+use App\Entities\Book;
 use App\Http\Requests\BookRequest;
 use Illuminate\Support\Facades\Auth;
 
