@@ -28,11 +28,13 @@
     "autoload": {
         "classmap": [
             "database",
-            "Modules/CodeEduBook/database"
+            "Modules/CodeEduBook/database",
+            "Modules/Users/database"
         ],
         "psr-4": {
             "App\\": "app/",
-            "CodeEduBook\\": "Modules/CodeEduBook/"
+            "CodeEduBook\\": "Modules/CodeEduBook/",
+            "Users\\": "Modules/Users/"
         }
     },
     "autoload-dev": {

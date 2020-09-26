@@ -176,6 +176,7 @@ return [
          */
 
         CodeEduBook\Providers\CodeEduBookServiceProvider::class,
+        Users\Providers\UsersServiceProvider::class,
 
         /*
          * Application Service Providers...

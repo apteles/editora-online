@@ -1,0 +1,54 @@
+<?php
+
+namespace Users\Repositories;
+
+use Users\Entities\User;
+use CodeEduBook\Criteria\OnlyTrashedTrait;
+use Prettus\Repository\Eloquent\BaseRepository;
+use Prettus\Repository\Criteria\RequestCriteria;
+
+/**
+ * Class CategorysRepositoryEloquent.
+ *
+ * @package namespace App\Repositories;
+ */
+class UserRepositoryEloquent extends BaseRepository implements UserRepository
+{
+    use OnlyTrashedTrait;
+
+    public function create(array $attributes)
+    {
+        $attributes['password'] = User::generatePassword();
+
+        $model = parent::create($attributes);
+
+        return $model;
+    }
+
+    public function update(array $attributes, $id)
+    {
+        $attributes = array_except($attributes, 'password');
+
+        $model = parent::update($attributes, $id);
+
+        return $model;
+    }
+
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
+    public function model()
+    {
+        return User::class;
+    }
+
+    /**
+     * Boot up the repository, pushing criteria
+     */
+    public function boot()
+    {
+        $this->pushCriteria(app(RequestCriteria::class));
+    }
+}
