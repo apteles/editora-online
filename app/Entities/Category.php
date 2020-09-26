@@ -21,6 +21,11 @@ class Category extends Model implements TableInterface, Transformable
         return ['ID', 'Nome'];
     }
 
+    public function getNameTrashedAttribute()
+    {
+        return $this->trashed() ? "{$this->name} (Inativa)" : $this->name;
+    }
+
     public function getValueForHeader($header)
     {
         if ($header === 'ID') {
