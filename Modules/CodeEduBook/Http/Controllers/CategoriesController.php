@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace CodeEduBook\Http\Controllers;
 
-use App\Entities\Category;
 use Illuminate\Http\Request;
-use App\Http\Requests\CategoryRequest;
-use App\Repositories\CategoryRepository;
+use CodeEduBook\Entities\Category;
+use CodeEduBook\Http\Requests\CategoryRequest;
+use CodeEduBook\Repositories\CategoryRepository;
 
 class CategoriesController extends Controller
 {
@@ -24,8 +24,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = $this->categoryRepository->paginate();
-
-        return view('categories.index', \compact('categories'));
+        return view('codeedubook::categories.index', \compact('categories'));
     }
 
     /**
@@ -35,7 +34,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view('codeedubook::categories.create');
     }
 
     /**
@@ -62,7 +61,7 @@ class CategoriesController extends Controller
     public function edit($id)
     {
         $category = $this->categoryRepository->find($id);
-        return view('categories.edit', \compact('category'));
+        return view('codeedubook::categories.edit', \compact('category'));
     }
 
     /**
@@ -92,6 +91,6 @@ class CategoriesController extends Controller
         $this->categoryRepository->delete($id);
 
         $request->session()->flash('message', 'Categoria deletada com sucesso.');
-        return redirect()->route('categories.index');
+        return redirect()->route('codeedubook::categories.index');
     }
 }

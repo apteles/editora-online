@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Entities;
+namespace CodeEduBook\Entities;
 
+use App\Entities\User;
 use Illuminate\Database\Eloquent\Model;
 use Bootstrapper\Interfaces\TableInterface;
 use Collective\Html\Eloquent\FormAccessible;

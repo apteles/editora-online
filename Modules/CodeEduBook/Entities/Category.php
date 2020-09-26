@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entities;
+namespace CodeEduBook\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Bootstrapper\Interfaces\TableInterface;

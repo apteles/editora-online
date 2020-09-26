@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace CodeEduBook\Http\Requests;
 
-use App\Repositories\BookRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Foundation\Http\FormRequest;
+use CodeEduBook\Repositories\BookRepository;
 
 class BookRequest extends FormRequest
 {

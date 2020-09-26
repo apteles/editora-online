@@ -2,6 +2,7 @@
 
 namespace CodeEduBook\Providers;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 class CodeEduBookServiceProvider extends ServiceProvider
@@ -23,6 +24,7 @@ class CodeEduBookServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
+        $this->registerMigrationAndSeeds();
     }
 
     /**
@@ -32,6 +34,7 @@ class CodeEduBookServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->register(RepositoryServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
     }
 
@@ -68,7 +71,7 @@ class CodeEduBookServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(\array_merge(\array_map(function ($path) {
             return $path . '/modules/codeedubook';
-        }, \Config::get('view.paths')), [$sourcePath]), 'codeedubook');
+        }, Config::get('view.paths')), [$sourcePath]), 'codeedubook');
     }
 
     /**
@@ -85,6 +88,21 @@ class CodeEduBookServiceProvider extends ServiceProvider
         } else {
             $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'codeedubook');
         }
+    }
+
+    public function registerMigrationAndSeeds()
+    {
+        $sourcePath = __DIR__ . '/../database/Migrations';
+
+        $this->publishes([
+            $sourcePath => database_path('migrations')
+        ], 'migrations');
+
+        $sourcePath = __DIR__ . '/../database/seeders';
+
+        $this->publishes([
+            $sourcePath => database_path('seeds')
+        ], 'seeders');
     }
 
     /**

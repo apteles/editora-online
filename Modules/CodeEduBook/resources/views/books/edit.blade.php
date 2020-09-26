@@ -9,7 +9,7 @@
 
         {!! Form::model($book, ['route' => ['books.update','book' => $book->id ], 'class' => 'form', 'method' => 'PUT']) !!}
    
-            @include('books._form')
+            @include('codeedubook::books._form')
             
         <div class="form-group">
             {!! Form::submit('editar livro', ['class' => 'btn btn-primary']) !!}

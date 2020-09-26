@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Criteria;
+namespace CodeEduBook\Criteria;
 
 interface OnlyTrashedInterface
 {

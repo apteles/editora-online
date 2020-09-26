@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace CodeEduBook\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\BookRequest;
-use App\Repositories\BookRepository;
 use Illuminate\Support\Facades\Auth;
-use App\Repositories\CategoryRepository;
+use CodeEduBook\Http\Requests\BookRequest;
+use CodeEduBook\Repositories\BookRepository;
+use CodeEduBook\Repositories\CategoryRepository;
 
 class BooksController extends Controller
 {
@@ -28,7 +28,7 @@ class BooksController extends Controller
     public function index(Request $request)
     {
         $books = $this->bookRepository->paginate();
-        return view('books.index', \compact('books'));
+        return view('codeedubook::books.index', \compact('books'));
     }
 
     /**
@@ -40,7 +40,7 @@ class BooksController extends Controller
     {
         $categories = $this->categoryRepository->lists('name', 'id');
 
-        return view('books.create', \compact('categories'));
+        return view('codeedubook::books.create', \compact('categories'));
     }
 
     /**
@@ -72,7 +72,7 @@ class BooksController extends Controller
         $this->categoryRepository->withTrashed();
 
         $categories = $this->categoryRepository->listsWithMutators('name_trashed', 'id');
-        return view('books.edit', \compact('book', 'categories'));
+        return view('codeedubook::books.edit', \compact('book', 'categories'));
     }
 
     /**
@@ -102,6 +102,6 @@ class BooksController extends Controller
     public function destroy($id)
     {
         $this->bookRepository->delete($id);
-        return redirect()->route('books.index');
+        return redirect()->route('codeedubook::books.index');
     }
 }

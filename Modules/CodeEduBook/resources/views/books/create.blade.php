@@ -9,7 +9,7 @@
 
         {!! Form::open(['route' => 'books.store', 'class' => 'form']) !!}
 
-            @include('books._form')
+            @include('codeedubook::books._form')
             
         <div class="form-group">
             {!! Form::submit('criar livro', ['class' => 'btn btn-primary']) !!}

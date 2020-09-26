@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace CodeEduBook\Repositories;
 
-use App\Criteria\OnlyTrashedInterface;
+use CodeEduBook\Criteria\OnlyTrashedInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**

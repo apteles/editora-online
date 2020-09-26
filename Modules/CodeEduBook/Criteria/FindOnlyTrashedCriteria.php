@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Criteria;
+namespace CodeEduBook\Criteria;
 
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Class FindWithTrashedCriteria.
+ * Class FindOnlyTrashedCriteria.
  *
  * @package namespace App\Criteria;
  */
-class FindWithTrashedCriteria implements CriteriaInterface
+class FindOnlyTrashedCriteria implements CriteriaInterface
 {
     public function apply($model, RepositoryInterface $repository)
     {
-        return $model->withTrashed();
+        return $model->onlyTrashed();
     }
 }

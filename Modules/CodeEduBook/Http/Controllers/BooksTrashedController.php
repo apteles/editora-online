@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace CodeEduBook\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\BookRepository;
+use CodeEduBook\Repositories\BookRepository;
 
 class BooksTrashedController extends Controller
 {
@@ -27,7 +27,7 @@ class BooksTrashedController extends Controller
         $search = $request->get('search');
         $books = $this->bookRepository->onlyTrashed()->paginate(10);
 
-        return view('trashed.books.index', \compact('books', 'search'));
+        return view('codeedubook::trashed.books.index', \compact('books', 'search'));
     }
 
     public function show($id)
@@ -35,7 +35,7 @@ class BooksTrashedController extends Controller
         $this->bookRepository->onlyTrashed();
         $book = $this->bookRepository->find($id);
 
-        return view('trashed.books.show', \compact('book'));
+        return view('codeedubook::trashed.books.show', \compact('book'));
     }
 
     public function update(Request $request, $id)

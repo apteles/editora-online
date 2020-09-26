@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repositories;
+namespace CodeEduBook\Repositories;
 
-use App\Entities\Book;
-use App\Criteria\OnlyTrashedTrait;
+use CodeEduBook\Entities\Book;
+use CodeEduBook\Criteria\OnlyTrashedTrait;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 
