@@ -1,7 +1,7 @@
 <?php
 
-use App\Entities\Category;
 use Illuminate\Database\Seeder;
+use CodeEduBook\Entities\Category;
 
 class CategoriesTableSeeder extends Seeder
 {

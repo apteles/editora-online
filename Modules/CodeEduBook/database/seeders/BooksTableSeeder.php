@@ -1,8 +1,8 @@
 <?php
 
-use App\Entities\Book;
-use App\Entities\Category;
+use CodeEduBook\Entities\Book;
 use Illuminate\Database\Seeder;
+use CodeEduBook\Entities\Category;
 
 class BooksTableSeeder extends Seeder
 {

@@ -92,7 +92,7 @@ class CodeEduBookServiceProvider extends ServiceProvider
 
     public function registerMigrationAndSeeds()
     {
-        $sourcePath = __DIR__ . '/../database/Migrations';
+        $sourcePath = __DIR__ . '/../database/migrations';
 
         $this->publishes([
             $sourcePath => database_path('migrations')
