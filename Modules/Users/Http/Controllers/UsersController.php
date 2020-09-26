@@ -2,9 +2,9 @@
 
 namespace Users\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Users\Http\Requests\UserRequest;
 use Users\Repositories\UserRepository;
+use Users\Http\Requests\UserDeleteRequest;
 
 class UsersController extends Controller
 {
@@ -85,7 +85,7 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(UserDeleteRequest $request, $id)
     {
         $this->userRepository->delete($id);
 
