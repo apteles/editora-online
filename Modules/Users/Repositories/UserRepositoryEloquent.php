@@ -6,6 +6,7 @@ use Users\Entities\User;
 use CodeEduBook\Criteria\OnlyTrashedTrait;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
+use Jrean\UserVerification\Facades\UserVerification;
 
 /**
  * Class CategorysRepositoryEloquent.
@@ -21,7 +22,10 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         $attributes['password'] = User::generatePassword();
 
         $model = parent::create($attributes);
-
+        UserVerification::generate($model);
+        $subject = config('users.email.user_created.subject');
+        UserVerification::emailView('users::emails.user-created');
+        UserVerification::send($model, $subject);
         return $model;
     }
 

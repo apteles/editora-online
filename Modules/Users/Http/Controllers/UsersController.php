@@ -89,6 +89,6 @@ class UsersController extends Controller
         $this->userRepository->delete($id);
 
         $request->session()->flash('message', 'Usuário deletado com sucesso.');
-        return redirect()->route('users::users.index');
+        return redirect()->route('users.index');
     }
 }
