@@ -72,7 +72,8 @@ class UsersController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
-        $this->userRepository->update($request->all(), $id);
+        $data = $request->except(['password']);
+        $this->userRepository->update($data, $id);
 
         $request->session()->flash('message', 'Usuário atualizado com sucesso.');
         $previousURL = $request->get('redirect_to', route('users.index'));

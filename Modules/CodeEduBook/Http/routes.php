@@ -1,8 +1,7 @@
 <?php
 
 //Route::get('/foo', 'CodeEduBookController@index');
-
-Route::group(['midleware' => 'auth'], function () {
+Route::group(['midleware' => ['auth', 'isVerified']], function () {
     Route::resource('categories', 'CategoriesController', ['except' => 'show']);
     Route::resource('books', 'BooksController', ['except' => 'show']);
 

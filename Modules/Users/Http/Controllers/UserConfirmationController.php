@@ -14,21 +14,24 @@ class UserConfirmationController extends Controller
 
     private $userRepository;
 
-    public function __construct(UserRepository $model)
+    private $request;
+
+    public function __construct(UserRepository $model, Request $request)
     {
         $this->userRepository = $model;
+        $this->request = $request;
     }
 
     public function redirectAfterVerification()
     {
         $this->loginUser();
-        return route('codeeduuser.user_settings.edit');
+        return route('user_settings.edit');
     }
 
     private function loginUser()
     {
-        $email = Request::get('email');
-        $user = $this->user->findByField('email', $email)->first();
+        $email = $this->request->get('email');
+        $user = $this->userRepository->findByField('email', $email)->first();
 
         Auth::login($user);
     }
