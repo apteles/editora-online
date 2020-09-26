@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Entities\Category;
+use App\Criteria\OnlyTrashedTrait;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 
@@ -13,7 +14,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
  */
 class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepository
 {
-    use BaseRepositoryTrait;
+    use BaseRepositoryTrait, OnlyTrashedTrait;
 
     /**
      * Specify Model class name
@@ -23,6 +24,12 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
     public function model()
     {
         return Category::class;
+    }
+
+    public function listsWithMutators($column, $key = null)
+    {
+        $collection = $this->all();
+        return $collection->pluck($column, $key);
     }
 
     /**
