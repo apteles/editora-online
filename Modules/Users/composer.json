@@ -1,0 +1,15 @@
+{
+    "name": "apteles/users",
+    "description": "",
+    "authors": [
+        {
+            "name": "André Teles",
+            "email": "andre.telestp@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Users\\": ""
+        }
+    }
+}

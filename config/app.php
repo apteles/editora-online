@@ -176,6 +176,7 @@ return [
          */
 
         CodeEduBook\Providers\CodeEduBookServiceProvider::class,
+        Users\Providers\UsersServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -257,6 +258,7 @@ return [
         'Tabbable' => 'Bootstrapper\Facades\Tabbable',
         'Table' => 'Bootstrapper\Facades\Table',
         'Thumbnail' => 'Bootstrapper\Facades\Thumbnail',
-        'Module' => Nwidart\Modules\Facades::class
+        'Module' => Nwidart\Modules\Facades::class,
+        'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
     ],
 ];
