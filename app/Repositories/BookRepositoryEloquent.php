@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Entities\Book;
+use App\Criteria\OnlyTrashedTrait;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 
@@ -13,6 +14,8 @@ use Prettus\Repository\Criteria\RequestCriteria;
  */
 class BookRepositoryEloquent extends BaseRepository implements BookRepository
 {
+    use OnlyTrashedTrait, RepositoryRestoreTrait;
+
     protected $fieldSearchable = [
         'title' => 'like',
         'author.name' => 'like'

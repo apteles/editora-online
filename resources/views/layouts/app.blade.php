@@ -43,7 +43,7 @@ echo \json_encode([
                                 'title' => 'Listagem'
                             ],
                             [
-                                'link' => '',
+                                'link' => route('trashed.books.index'),
                                 'title' => 'Lixeira'
                             ]
                         ]

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Entities\Book;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookRequest;
 use App\Repositories\BookRepository;
@@ -67,9 +66,12 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit($id)
     {
-        $categories = $this->categoryRepository->lists('name', 'id');
+        $book = $this->bookRepository->find($id);
+        $this->categoryRepository->withTrashed();
+
+        $categories = $this->categoryRepository->listsWithMutators('name_trashed', 'id');
         return view('books.edit', \compact('book', 'categories'));
     }
 
