@@ -53,4 +53,9 @@ class User extends Authenticatable implements TableInterface
             return $this->email;
         }
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
 }
