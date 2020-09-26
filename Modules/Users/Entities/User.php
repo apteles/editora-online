@@ -4,6 +4,7 @@ namespace Users\Entities;
 
 use Illuminate\Notifications\Notifiable;
 use Bootstrapper\Interfaces\TableInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -57,5 +58,19 @@ class User extends Authenticatable implements TableInterface
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * @param Collection|string $role
+     * @return boolean
+     */
+    public function hasRole($role)
+    {
+        return \is_string($role) ?
+                $this->roles()->contains('name', $role) :
+                /**
+                 * @var Collection $role
+                 */
+               (boolean) $role->intersect($this->roles)->count();
     }
 }
