@@ -17,7 +17,7 @@ class Book extends Model implements TableInterface
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'author_id', 'id')->withTrashed();
+        return $this->belongsTo(User::class, 'author_id', 'id');
     }
 
     public function formCategoriesAttribute()
@@ -48,6 +48,6 @@ class Book extends Model implements TableInterface
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class)->withTrashed();
     }
 }
