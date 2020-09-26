@@ -6,7 +6,7 @@ return [
             'subject' => config('app.name') . ' - Sua conta foi criada'
         ]
     ],
-    'midleware' => [
+    'middleware' => [
         'isVerified' => 'isVerified'
     ],
     'user_default' => [
