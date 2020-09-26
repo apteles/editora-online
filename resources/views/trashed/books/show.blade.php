@@ -20,7 +20,7 @@
                 <li class="list-group-item">
                         <strong>Categories</strong>
                 </li>
-                <li class="list-group-item">{{$book->categories->implode('name',', ')}}</li>
+                <li class="list-group-item">{{$book->categories->implode('name_trashed',', ')}}</li>
 
             </ul>
         </div>
