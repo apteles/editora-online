@@ -4,6 +4,7 @@ namespace Users\Providers;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
+use Jrean\UserVerification\UserVerificationServiceProvider;
 
 class UsersServiceProvider extends ServiceProvider
 {
@@ -34,6 +35,7 @@ class UsersServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->register(UserVerificationServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
     }
