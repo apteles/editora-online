@@ -5,16 +5,19 @@ namespace App\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Bootstrapper\Interfaces\TableInterface;
 use Collective\Html\Eloquent\FormAccessible;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Book extends Model implements TableInterface
 {
-    use FormAccessible;
+    use FormAccessible, SoftDeletes;
 
     protected $fillable = ['title', 'subtitle', 'price', 'author_id'];
 
+    protected $dates = ['deleted_at'];
+
     public function author()
     {
-        return $this->belongsTo(User::class, 'author_id', 'id');
+        return $this->belongsTo(User::class, 'author_id', 'id')->withTrashed();
     }
 
     public function formCategoriesAttribute()
