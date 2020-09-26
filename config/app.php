@@ -168,6 +168,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Bootstrapper\BootstrapperL5ServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
+        Nwidart\Modules\LaravelModulesServiceProvider::class,
         //
 
         /*
@@ -250,5 +251,6 @@ return [
         'Tabbable' => 'Bootstrapper\Facades\Tabbable',
         'Table' => 'Bootstrapper\Facades\Table',
         'Thumbnail' => 'Bootstrapper\Facades\Thumbnail',
+        'Module' => Nwidart\Modules\Facades::class
     ],
 ];
