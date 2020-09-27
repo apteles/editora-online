@@ -4,6 +4,7 @@ namespace Users\Entities;
 
 use Illuminate\Notifications\Notifiable;
 use Bootstrapper\Interfaces\TableInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -31,6 +32,11 @@ class User extends Authenticatable implements TableInterface
         'password', 'remember_token',
     ];
 
+    public function formRolesAttribute()
+    {
+        return $this->roles->pluck('id')->all();
+    }
+
     public static function generatePassword($password = null)
     {
         return $password ? bcrypt($password) : bcrypt(str_random(8));
@@ -52,5 +58,32 @@ class User extends Authenticatable implements TableInterface
         if ($header === 'Email') {
             return $this->email;
         }
+        if ($header === 'Roles') {
+            return $this->roles->implode('name', '|');
+        }
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * @param Collection|string $role
+     * @return boolean
+     */
+    public function hasRole($role)
+    {
+        return \is_string($role) ?
+                $this->roles->contains('name', $role) :
+                /**
+                 * @var Collection $role
+                 */
+               (boolean) $role->intersect($this->roles)->count();
+    }
+
+    public function isAdmin()
+    {
+        return $this->hasRole(config('users.acl.role_admin'));
     }
 }

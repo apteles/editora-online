@@ -52,6 +52,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'isVerified' => \Jrean\UserVerification\Middleware\IsVerified::class // fix this. The midleware has not been called
+        'isVerified' => \Jrean\UserVerification\Middleware\IsVerified::class,
+        'auth.resource' => \Users\Http\Middleware\AuthorizationResource::class
     ];
 }

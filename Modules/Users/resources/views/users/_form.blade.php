@@ -12,3 +12,8 @@
     {!! Form::error('email', $errors) !!}
 {!! Html::closeFormGroup() !!}
 
+{!! Html::openFormGroup('roles.*', $errors) !!}
+    {!! Form::label('roles[]', 'Papel de usuário', ['class' => 'control-label']) !!}
+    {!! Form::select('roles[]',$roles, null, ['class' => 'form-control','multiple' => 'true']) !!}
+    {!! Form::error('roles.*', $errors) !!}
+{!! Html::closeFormGroup() !!}

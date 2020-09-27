@@ -4,7 +4,12 @@ namespace CodeEduBook\Http\Controllers;
 
 use Illuminate\Http\Request;
 use CodeEduBook\Repositories\BookRepository;
+use Users\Annotations\Mappings\Action as ActionAnnotation;
+use Users\Annotations\Mappings\Controller as ControllerAnnotation;
 
+/**
+ * @ControllerAnnotation(name="book-trashed-admin",description="Administração de Lixeira Livros")
+ */
 class BooksTrashedController extends Controller
 {
     /**
@@ -19,7 +24,7 @@ class BooksTrashedController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
+     * @ActionAnnotation(name="list",description="Ver listagem de Lixeira Livros")
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -38,6 +43,9 @@ class BooksTrashedController extends Controller
         return view('codeedubook::trashed.books.show', \compact('book'));
     }
 
+    /**
+     * @ActionAnnotation(name="update",description="Restaura Livros da Lixeira")
+    */
     public function update(Request $request, $id)
     {
         $this->bookRepository->onlyTrashed();

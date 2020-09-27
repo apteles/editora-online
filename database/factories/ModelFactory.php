@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Entities\User::class, function (Faker\Generator $faker) {
+$factory->define(Users\Entities\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -20,22 +20,29 @@ $factory->define(App\Entities\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+        'verified' => true
+    ];
+});
+
+$factory->state(Users\Entities\User::class, 'author', function ($faker) {
+    return [
+        'email' => 'autor@editora.com'
     ];
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Entities\Category::class, function (Faker\Generator $faker) {
+$factory->define(CodeEduBook\Entities\Category::class, function (Faker\Generator $faker) {
     return [
         'name' => \ucfirst($faker->unique()->word()),
     ];
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Entities\Book::class, function (Faker\Generator $faker) {
+$factory->define(CodeEduBook\Entities\Book::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->name,
         'subtitle' => $faker->sentence(),
         'price' => $faker->randomFloat(2, 0, 999),
-        'author_id' => \rand(1, 10)
+        'author_id' => \rand(1, 2)
     ];
 });

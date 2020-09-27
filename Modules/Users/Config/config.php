@@ -6,7 +6,7 @@ return [
             'subject' => config('app.name') . ' - Sua conta foi criada'
         ]
     ],
-    'midleware' => [
+    'middleware' => [
         'isVerified' => 'isVerified'
     ],
     'user_default' => [
@@ -17,7 +17,6 @@ return [
     'acl' => [
         'role_admin' => env('ROLE_ADMIN', 'Admin'),
         'controllers_annotations' => [
-            __DIR__ . '/../Modules/CodeEduUser/Http/Controllers'
         ]
     ]
 ];

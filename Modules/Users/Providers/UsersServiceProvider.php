@@ -4,6 +4,7 @@ namespace Users\Providers;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
+use Doctrine\Common\Annotations\AnnotationRegistry;
 use Jrean\UserVerification\UserVerificationServiceProvider;
 
 class UsersServiceProvider extends ServiceProvider
@@ -37,7 +38,10 @@ class UsersServiceProvider extends ServiceProvider
     {
         $this->app->register(UserVerificationServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
+        $this->app->register(ReaderServiceProvider::class);
+        $this->app->register(AuthServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+        $this->registerAnnotations();
     }
 
     /**
@@ -54,6 +58,12 @@ class UsersServiceProvider extends ServiceProvider
             __DIR__ . '/../Config/config.php',
             'users'
         );
+    }
+
+    public function registerAnnotations()
+    {
+        $autoload = require __DIR__ . '/../../../vendor/autoload.php';
+        AnnotationRegistry::registerLoader([$autoload, 'loadClass']);
     }
 
     /**
