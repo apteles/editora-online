@@ -7,7 +7,7 @@ use Bootstrapper\Interfaces\TableInterface;
 
 class Chapter extends Model implements TableInterface
 {
-    protected $fillable = ['name', 'content', 'order'];
+    protected $fillable = ['name', 'content', 'order', 'book_id'];
 
     public function book()
     {

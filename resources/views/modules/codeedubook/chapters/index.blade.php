@@ -4,13 +4,14 @@
 
     <div class="container">
         <div class="row">
-            <h3>Listagem de Livros</h3>
-            <a href="{{ route('books.create') }}" class="btn btn-primary">Novo Livro</a>
+
+            <h3>Capítulos de: {{$book->title}}</h3>
+            {!! Button::primary('Novo capitulo')->asLinkTo(route('chapters.create', ['book' => $book->id])) !!}
         </div>
         <br>
         <div class="row">
             {!! Form::model(compact('search'),['class' =>'form-inline','method' => 'GET']) !!}
-                {!! Form::label('search','Pesquisar por título',['class' => 'control-label']) !!}
+                {!! Form::label('search','Pesquisar por capítulo',['class' => 'control-label']) !!}
                 {!! Form::text('search',null,['class' => 'form-control']) !!}
                 {!! Button::primary('Buscar')->submit() !!}
             {!! Form::close() !!}
@@ -19,16 +20,15 @@
         <div class="row">
 
         {!! 
-                Table::withContents($books->items())
+                Table::withContents($chapters->items())
                                     ->striped()
-                                        ->callback('Ações', function($field,$book){
-                                        $linkEdit = route('books.edit',['book' => $book->id]);
-                                        $linkDestroy = route('books.destroy',['book' => $book->id]);
-                                        $linkChapters = route('chapters.index',['book' => $book->id]);
-                                        $deleteForm = "delete-form-{$book->id}";
+                                        ->callback('Ações', function($field,$chapter) use($book){
+                                        $linkEdit = route('chapters.edit',['book' => $book->id, 'chapter' => $chapter->id]);
+                                        $linkDestroy = route('chapters.destroy',['book' => $book->id, 'chapter' => $chapter->id]);
+                                        $deleteForm = "delete-form-{$chapter->id}";
 
                                         $form = Form::open(['route' =>
-                                                            ['books.destroy','book' => $book->id],
+                                                            ['chapters.destroy','book' => $book->id, 'chapter' => $chapter->id],
                                                             'method' => 'DELETE','id' => $deleteForm,'style' => 'display:none']).
                                                             Form::close();
                                             $anchorDestroy = Button::link('Delete')
@@ -36,7 +36,6 @@
                                                                         'onclick' => "event.preventDefault();document.getElementById(\"{$deleteForm}\").submit();"
                                                                     ]);
                                             return "<ul class='list-inline'>
-                                                                        <li>". Button::link('Capítulos')->asLinkTo($linkChapters) ."</li>
                                                                         <li>". Button::link('Editar')->asLinkTo($linkEdit) ."</li>
                                                                         <li>". $anchorDestroy ."</li>
                                                     </ul>" . $form;
@@ -45,7 +44,7 @@
 
         !!}
 
-            {{ $books->links() }}
+            {{ $chapters->links() }}
 
         </div>
     </div>
