@@ -32,7 +32,8 @@ class BookRequest extends FormRequest
 
             $book = $this->bookRepository->find($id);
 
-            return $book->author_id === Auth::user()->id;
+            //return $book > author_id === Auth::user()->id;
+            return Auth::user()->can('update', $book);
         }
 
         return true;

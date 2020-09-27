@@ -70,6 +70,8 @@ class Permission
     public function getControllers()
     {
         $dirs = config('users.acl.controllers_annotations');
+        $config = include __DIR__ . '/../../Config/config.local.php';
+        $dirs = \array_merge($dirs, $config['acl']['controllers_annotations']);
         $files = [];
 
         foreach ($dirs as $dir) {

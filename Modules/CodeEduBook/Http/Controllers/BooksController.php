@@ -4,10 +4,16 @@ namespace CodeEduBook\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use CodeEduBook\Criteria\FindByAuthor;
 use CodeEduBook\Http\Requests\BookRequest;
 use CodeEduBook\Repositories\BookRepository;
 use CodeEduBook\Repositories\CategoryRepository;
+use Users\Annotations\Mappings\Action as ActionAnnotation;
+use Users\Annotations\Mappings\Controller as ControllerAnnotation;
 
+/**
+ * @ControllerAnnotation(name="book-admin",description="Administração de Livros")
+ */
 class BooksController extends Controller
 {
     private $bookRepository;
@@ -17,12 +23,13 @@ class BooksController extends Controller
     public function __construct(BookRepository $book, CategoryRepository $category)
     {
         $this->bookRepository = $book;
+        $this->bookRepository->pushCriteria(new FindByAuthor);
         $this->categoryRepository = $category;
     }
 
     /**
      * Display a listing of the resource.
-     *
+     * @ActionAnnotation(name="list",description="Ver listagem de Livros")
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -33,7 +40,7 @@ class BooksController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
+     * @ActionAnnotation(name="store",description="Criar Livros")
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -62,7 +69,7 @@ class BooksController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
+     * @ActionAnnotation(name="update",description="Atualizar Livros")
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -95,7 +102,7 @@ class BooksController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     * @ActionAnnotation(name="destroy",description="Excluir Livros")
      * @param  Category  $category
      * @return \Illuminate\Http\Response
      */

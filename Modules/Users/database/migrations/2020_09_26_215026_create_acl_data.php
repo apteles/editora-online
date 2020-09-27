@@ -22,21 +22,14 @@ class CreateAclData extends Migration
         $user->roles()->save($role);
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        $role = Role::where('name', config('users.acl.role_admin'))->first();
-        $user = $this->getUser();
-        $user->roles()->detach($role->id);
-        $role->delete();
-    }
+        $roleAdmin = Role::where('name', config('users.acl.role_admin'))->first();
+        $user = User::where('email', config('users.user_default.email'))->first();
+        $user->roles()->detach($roleAdmin->id);
 
-    private function getUser()
-    {
-        return User::where('email', config('users.user_default.email'))->first();
+        $roleAdmin->permissions()->detach();
+        $roleAdmin->users()->detach();
+        $roleAdmin->delete();
     }
 }

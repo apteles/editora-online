@@ -12,12 +12,18 @@ class CreateUsersDatabase extends Migration
      */
     public function up()
     {
-        User::create([
+        factory(User::class, 1)->create([
             'name' => config('users.user_default.name'),
             'email' => config('users.user_default.email'),
             'password' => bcrypt(config('users.user_default.password')),
             'verified' => true
         ]);
+        // User::create([
+       //     'name' => config('users.user_default.name'),
+       //     'email' => config('users.user_default.email'),
+       //     'password' => bcrypt(config('users.user_default.password')),
+       //     'verified' => true
+       // ]);
     }
 
     /**

@@ -20,6 +20,13 @@ $factory->define(Users\Entities\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+        'verified' => true
+    ];
+});
+
+$factory->state(Users\Entities\User::class, 'author', function ($faker) {
+    return [
+        'email' => 'autor@editora.com'
     ];
 });
 
@@ -36,6 +43,6 @@ $factory->define(CodeEduBook\Entities\Book::class, function (Faker\Generator $fa
         'title' => $faker->name,
         'subtitle' => $faker->sentence(),
         'price' => $faker->randomFloat(2, 0, 999),
-        'author_id' => \rand(1, 10)
+        'author_id' => \rand(1, 2)
     ];
 });

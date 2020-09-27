@@ -6,7 +6,12 @@ use Illuminate\Http\Request;
 use CodeEduBook\Entities\Category;
 use CodeEduBook\Http\Requests\CategoryRequest;
 use CodeEduBook\Repositories\CategoryRepository;
+use Users\Annotations\Mappings\Action as ActionAnnotation;
+use Users\Annotations\Mappings\Controller as ControllerAnnotation;
 
+/**
+ * @ControllerAnnotation(name="categories-admin",description="Administração de Categorias")
+ */
 class CategoriesController extends Controller
 {
     private $categoryRepository;
@@ -18,7 +23,7 @@ class CategoriesController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
+     * @ActionAnnotation(name="list",description="Ver listagem de Categorias")
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -29,7 +34,7 @@ class CategoriesController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
+     * @ActionAnnotation(name="create",description="Criar Categorias")
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -55,6 +60,7 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @ActionAnnotation(name="update",description="Atualizar Categorias")
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -83,6 +89,7 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @ActionAnnotation(name="delete",description="Deletar Categorias")
      * @param  Category  $category
      * @return \Illuminate\Http\Response
      */

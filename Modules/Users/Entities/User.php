@@ -32,6 +32,11 @@ class User extends Authenticatable implements TableInterface
         'password', 'remember_token',
     ];
 
+    public function formRolesAttribute()
+    {
+        return $this->roles->pluck('id')->all();
+    }
+
     public static function generatePassword($password = null)
     {
         return $password ? bcrypt($password) : bcrypt(str_random(8));
@@ -52,6 +57,9 @@ class User extends Authenticatable implements TableInterface
         }
         if ($header === 'Email') {
             return $this->email;
+        }
+        if ($header === 'Roles') {
+            return $this->roles->implode('name', '|');
         }
     }
 

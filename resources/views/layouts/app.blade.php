@@ -17,9 +17,12 @@
     <!-- Scripts -->
     <script>
         window.Laravel = <?php
+
+use Users\Facade\NavbarAuthorization;
+
 echo \json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
+    'csrfToken' => csrf_token(),
+]); ?>
     </script>
 
 </head>
@@ -33,40 +36,42 @@ echo \json_encode([
                 $arrayLinks = [
                     [
                         'link' => route('categories.index'),
-                        'title' => 'Categorias'
+                        'title' => 'Categorias',
+                        'permission' => 'categories-admin/list'
                     ],
                     [
                         'Livro',
                         [
                             [
                                 'link' => route('books.index'),
-                                'title' => 'Listagem'
+                                'title' => 'Listagem',
+                                'permission' => 'book-admin/list'
                             ],
                             [
                                 'link' => route('trashed.books.index'),
-                                'title' => 'Lixeira'
+                                'title' => 'Lixeira',
+                                'permission' => 'book-trashed-admin/list'
                             ]
                         ]
-                    ]
-                ];
-
-                if (Auth::user()->can('users-admin/list')) {
-                    $arrayLinks[] = [
+                    ],
+                    [
                         'Usuários',
                         [
                             [
-                                'link' => '',
-                                'title' => 'Usuários'
+                                'link' => route('users.index'),
+                                'title' => 'Usuários',
+                                'permission' => 'users-admin/list'
                             ],
                             [
-                                'link' => '',
-                                'title' => 'Papel de usuários'
+                                'link' => route('roles.index'),
+                                'title' => 'Papel de usuários',
+                                'permission' => 'roles-admin/list'
                             ]
-                        ]
-                    ];
-                }
+                        ],
+                    ]
+                ];
 
-                $links = Navigation::links($arrayLinks);
+                $links = Navigation::links(NavbarAuthorization::getLinksAuthorized($arrayLinks));
 
                 $logout = Navigation::links([
                     [
