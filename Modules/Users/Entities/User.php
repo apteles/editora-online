@@ -67,10 +67,15 @@ class User extends Authenticatable implements TableInterface
     public function hasRole($role)
     {
         return \is_string($role) ?
-                $this->roles()->contains('name', $role) :
+                $this->roles->contains('name', $role) :
                 /**
                  * @var Collection $role
                  */
                (boolean) $role->intersect($this->roles)->count();
+    }
+
+    public function isAdmin()
+    {
+        return $this->hasRole(config('users.acl.role_admin'));
     }
 }
