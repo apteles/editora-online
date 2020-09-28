@@ -60,6 +60,7 @@ class BooksController extends Controller
     {
         $dataFromRequest = $request->all();
         $dataFromRequest['author_id'] = Auth::user()->id;
+        $dataFromRequest['published'] = $request->get('published', false);
         $this->bookRepository->create($dataFromRequest);
 
         $request->session()->flash('message', 'Livro cadastrado com sucesso.');

@@ -3,6 +3,9 @@
 //Route::get('/foo', 'CodeEduBookController@index');
 Route::group(['middleware' => ['auth', 'isVerified', 'auth.resource']], function () {
     Route::resource('categories', 'CategoriesController', ['except' => 'show']);
+    Route::group(['prefix' => 'books/{books}'], function () {
+        Route::resource('chapters', 'ChaptersController', ['except' => 'show']);
+    });
     Route::resource('books', 'BooksController', ['except' => 'show']);
 
     Route::group(['prefix' => 'trashed', 'as' => 'trashed.'], function () {
