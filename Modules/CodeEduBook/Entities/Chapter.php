@@ -16,7 +16,7 @@ class Chapter extends Model implements TableInterface
 
     public function getTableHeaders()
     {
-        return ['#', 'Nome'];
+        return ['#', 'Nome', 'Order'];
     }
 
     public function getValueForHeader($header)
@@ -26,6 +26,9 @@ class Chapter extends Model implements TableInterface
         }
         if ($header === 'Nome') {
             return $this->name;
+        }
+        if ($header === 'Order') {
+            return $this->order;
         }
     }
 }

@@ -3,6 +3,7 @@
 namespace CodeEduBook\Http\Controllers;
 
 use Illuminate\Http\Request;
+use CodeEduBook\Criteria\OrderBy;
 use Illuminate\Support\Facades\URL;
 use CodeEduBook\Criteria\FindByBook;
 use CodeEduBook\Criteria\FindByAuthor;
@@ -38,6 +39,7 @@ class ChaptersController extends Controller
     {
         $book = $this->bookRepository->find($id);
         $search = $request->get('search');
+        $this->chapterRepository->pushCriteria(new OrderBy);
         $this->chapterRepository->pushCriteria(new FindByBook($id));
         $chapters = $this->chapterRepository->paginate(10);
 
