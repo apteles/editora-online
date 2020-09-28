@@ -46,7 +46,11 @@ $factory->define(CodeEduBook\Entities\Book::class, function (Faker\Generator $fa
         'title' => $faker->name,
         'subtitle' => $faker->sentence(),
         'price' => $faker->randomFloat(2, 0, 999),
-        'author_id' => \rand(1, 2)
+        'author_id' => \rand(1, 2),
+        'dedication' => $faker->sentence,
+        'description' => $faker->paragraph,
+        'website' => $faker->url,
+        'percent_complete' => \rand(1, 100)
     ];
 });
 

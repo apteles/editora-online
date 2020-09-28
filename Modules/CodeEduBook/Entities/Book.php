@@ -12,7 +12,7 @@ class Book extends Model implements TableInterface
 {
     use FormAccessible, SoftDeletes;
 
-    protected $fillable = ['title', 'subtitle', 'price', 'author_id'];
+    protected $fillable = ['title', 'subtitle', 'price', 'author_id', 'dedication', 'description', 'website', 'percent_complete', 'published'];
 
     protected $dates = ['deleted_at'];
 
