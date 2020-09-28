@@ -131,5 +131,21 @@ echo \json_encode([
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script src="/js/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('content',{
+            toolbarGroups: [
+                {name: 'tools'},
+                {name: 'basicstyles', groups: ['basicstyles', 'cleanup']},
+                {name: 'styles'},
+                {name: 'others'}
+            ],
+            removeButtons: 'Underline,Subscript,Superscript',
+            extraPlugins: 'markdown',
+            format_tags: 'p;h1;h2;h3;pre',
+            removeDialogTabs: 'image:advanced;link:advanced'
+        }); 
+
+    </script>
 </body>
 </html>
